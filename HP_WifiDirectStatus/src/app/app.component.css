@@ -1,0 +1,12 @@
+.main-div {
+  width: 100%;
+}
+.sidenav {
+  width: 20%;
+  float: left;
+}
+.landing-page {
+  margin-left: 10px;
+  float: right;
+  width: 79%;
+}

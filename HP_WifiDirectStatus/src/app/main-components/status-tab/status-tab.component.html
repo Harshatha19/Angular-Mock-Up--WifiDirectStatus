@@ -1,0 +1,40 @@
+<mat-card class="example-card">
+  <mat-card-header>
+    <mat-card-title>Wi-Fi Direct</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <p>
+      With Wi-Fi Direct you can print from a mobile device(such as smartphone or
+      notebook computer) directly without connecting to <br />
+      a wireless network.
+    </p>
+  </mat-card-content>
+  <mat-label>Status</mat-label>
+  <h3>On</h3>
+
+  <div>
+    <mat-label>Wi-fi Direct Name</mat-label>
+    <h3>{{ parsedData.name }}</h3>
+  </div>
+  <div class="ip">
+    <mat-label>IP Address</mat-label>
+    <h3>192.168.223.1</h3>
+  </div>
+  <div class="channel">
+    <mat-label>Wi-fi Direct Channel</mat-label>
+    <h3>{{ parsedData.channel }}</h3>
+  </div>
+  <div class="connection">
+    <mat-label>Connection Method</mat-label>
+    <h3>{{ parsedData.connection }}</h3>
+  </div>
+  <div class="pswd">
+    <mat-label>Wi-fi Direct Password</mat-label>
+    <h3>{{ parsedData.password }}</h3>
+  </div>
+
+  <mat-card style="border-radius: 0; border-color: 1px solid black">
+    <span>MAC Address </span> <span class="ip">IP Address</span>
+    <p>This table is empty</p>
+  </mat-card>
+</mat-card>

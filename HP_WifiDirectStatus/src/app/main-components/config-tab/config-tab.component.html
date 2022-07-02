@@ -1,0 +1,214 @@
+<mat-card>
+  <div
+    class="notawcmode"
+    *ngIf="randomDisplay > 0.5"
+    style="padding-bottom: 40px"
+  >
+    <div style="background-color: rgb(226, 241, 241)">
+      <h3><mat-icon>report_problem</mat-icon>Notes</h3>
+      <br />
+      The printer is currently busy running a wireless setup process using Wi-Fi
+      Direct, so Wi-Fi Direct Settings are not available at this time. Wait for
+      upto 2 hours and then refresh the browser window
+    </div>
+  </div>
+  <!--not awc mode-->
+
+  <div class="awcMode" *ngIf="randomDisplay < 0.5">
+    <div>
+      <h3>Wi-Fi Direct</h3>
+      <mat-slide-toggle class="toggle" [color]="color"></mat-slide-toggle>
+
+      <form (ngSubmit)="onsubmit(form)" #form="ngForm">
+        <p style="margin-top: 3px">
+          <mat-form-field appearance="legacy">
+            <mat-label>Wi-Fi Direct Name</mat-label>
+            <input
+              matInput
+              placeholder="Wi-Fi Direct Name"
+              id="wifidirectname"
+              name="wifidirectname"
+              [ngModel]="defaultValues?.wifidirectname"
+              #name="ngModel"
+              required
+            />
+          </mat-form-field>
+
+          <mat-form-field appearance="legacy">
+            <mat-label>Connection Method</mat-label>
+            <mat-select
+              name="connection"
+              #option="ngModel"
+              [ngModel]="defaultValues?.connection"
+              [(ngModel)]="optionselect.Title"
+            >
+              <mat-option
+                *ngFor="let title of titleArray"
+                [value]="title.Value"
+                >{{ title.Text }}</mat-option
+              >
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field appearance="legacy">
+            <mat-label>Channel List</mat-label>
+            <mat-select
+              name="channel"
+              ngModel
+              [ngModel]="defaultValues?.channel"
+            >
+              <mat-option id="channel 1" value="1">1</mat-option>
+              <mat-option id="channel 2" value="2">2</mat-option>
+              <mat-option id="channel 3" value="3">3</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </p>
+
+        <div class="allfields">
+          <div class="generatepass" style="margin-top: -15px">
+            <p>
+              <mat-slide-toggle
+                id="toggle"
+                *ngIf="option.value !== 'Automatic'"
+                (change)="genPassword($event)"
+                class="toggle"
+                [color]="color"
+                name="bool"
+                ngModel
+                >Generate Password<br
+              /></mat-slide-toggle>
+            </p>
+          </div>
+          <div class="toggleVal1">
+            <p>
+              <mat-slide-toggle
+                id="toggleVal1"
+                *ngIf="option.value === 'Advanced' && !securityCodeVal"
+                (change)="genPasswordSecurity($event)"
+                class="toggleVal1"
+                [color]="color"
+                name="bool1"
+                ngModel
+                >Generate security code<br
+              /></mat-slide-toggle>
+            </p>
+          </div>
+
+          <p>
+            <mat-form-field
+              style="margin-top: 10px"
+              appearance="legacy"
+              *ngIf="option.value !== 'Automatic'"
+            >
+              <mat-label>Wi-Fi Direct Password</mat-label>
+              <input
+                matInput
+                [ngModel]="defaultValues?.password"
+                type="password"
+                name="password"
+                placeholder="Wi-Fi Direct Password"
+                [ngModel]="randomValue"
+              />
+            </mat-form-field>
+
+            <mat-form-field
+              appearance="legacy"
+              *ngIf="option.value === 'Advanced' && !securityCodeVal"
+            >
+              <mat-label>Security Code</mat-label>
+              <input
+                matInput
+                [ngModel]="defaultValues?.securityCode"
+                name="securitycode"
+                type="password"
+                [ngModel]="randomValueSecurity"
+                placeholder="Security Code"
+                ngModel
+              />
+            </mat-form-field>
+          </p>
+        </div>
+        <!--allfields-->
+        <div class="togglebtn" style="margin-left: 400px">
+          <mat-slide-toggle
+            color="primary"
+            name="removepassword"
+            *ngIf="option.value === 'Advanced'"
+          >
+            <span
+              >Do not show the Wi-Fi Direct password on reports or on the
+              printer control panel.</span
+            >
+          </mat-slide-toggle>
+        </div>
+        <div class="row" style="margin-top: -45px">
+          <mat-slide-toggle color="primary" *ngIf="option.value === 'Advanced'">
+            <span>Do not show the Wi-Fi Direct Name on reports.</span>
+          </mat-slide-toggle>
+        </div>
+        <div class="table">
+          <br />
+          <mat-slide-toggle
+            color="primary"
+            name="toggle1"
+            [(ngModel)]="securityToggle"
+            *ngIf="option.value === 'Advanced'"
+          >
+            <span>Always request security code for each connection.</span>
+          </mat-slide-toggle>
+        </div>
+        <!--toggles-->
+        <!-- <br /> -->
+
+        <mat-icon
+          style="cursor: pointer"
+          *ngIf="option.value === 'Advanced' && !securityToggle"
+          >loop</mat-icon
+        >
+
+        <mat-icon
+          *ngIf="option.value === 'Advanced' && !securityToggle"
+          style="cursor: pointer"
+          (click)="deleteRow()"
+          >delete</mat-icon
+        >
+
+        <table *ngIf="option.value === 'Advanced' && !securityToggle">
+          <!--table-->
+          <thead>
+            <tr>
+              <th scope="col"></th>
+              <th scope="col">Device WiFi Direct Name</th>
+              <th scope="col">MAC Address</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let tableValue of shared.table">
+              <th>
+                <input
+                  class="checkbox"
+                  type="checkbox"
+                  [checked]="tableValue.checkValue"
+                  [value]="tableValue.row"
+                  (change)="ChangeOfValue(tableValue.row)"
+                />
+              </th>
+              <td>{{ tableValue.wifidirectName }}</td>
+              <td>{{ tableValue.macAddress }}</td>
+            </tr>
+          </tbody>
+        </table>
+        <!--table ends-->
+
+        <mat-divider></mat-divider>
+        <div class="buttons">
+          <button class="cancel" mat-raised-button (click)="form.reset()">
+            Cancel
+          </button>
+          <button class="apply" type="submit" mat-raised-button>Apply</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <!--awcmode ends-->
+</mat-card>

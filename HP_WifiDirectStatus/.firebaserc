@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "hpwdstatus": {
+      "hosting": {
+        "hp_Wds": [
+          "hpwdstatus"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "hpwdstatus"
+  }
+}

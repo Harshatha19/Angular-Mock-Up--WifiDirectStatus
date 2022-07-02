@@ -1,0 +1,29 @@
+* {
+  list-style: none;
+  text-decoration: none;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Open Sans", sans-serif;
+}
+.menu {
+  cursor: pointer;
+}
+body {
+  background: #f5f6fa;
+}
+.wrapper .sidebar {
+  background: #ffff;
+  left: 0;
+  width: 225px;
+  /* height: 800px; */
+  padding: 20px 0;
+  transition: all 0.5s ease;
+  box-shadow: 0.5px 0.5px 0.5px 0.5px;
+}
+.menu {
+  position: fixed;
+  overflow-y: scroll;
+  top: 65px;
+  bottom: 0;
+}

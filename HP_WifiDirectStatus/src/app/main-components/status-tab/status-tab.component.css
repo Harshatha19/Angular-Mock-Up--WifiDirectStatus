@@ -1,0 +1,28 @@
+mat-label {
+  color: rgb(112, 111, 111);
+}
+h3 {
+  font-weight: 500;
+}
+mat-card {
+  margin: 3px;
+  padding-right: 90px;
+  padding-bottom: 30px;
+  border-radius: 40px;
+  border: 1px solid grey;
+}
+.channel {
+  margin-left: 600px;
+  margin-top: -65px;
+}
+.ip {
+  margin-top: -85px;
+  margin-left: 300px;
+}
+.connection {
+  padding-top: 30px;
+}
+.pswd {
+  margin-left: 300px;
+  margin-top: -65px;
+}

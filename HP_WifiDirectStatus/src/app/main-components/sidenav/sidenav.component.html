@@ -1,0 +1,31 @@
+<div class="wrapper">
+  <div class="menu">
+    <img src="../../../assets/menuIcon.png" (click)="toggleSidenav()" />
+
+    <div class="sidebar" id="sidebar" [hidden]="! isDisplaySidenav">
+      <mat-nav-list *ngFor="let panel of config.sideNavpanels">
+        <a mat-list-item>{{ panel.text }}</a>
+      </mat-nav-list>
+      <mat-nav-list class="panel">
+        <mat-expansion-panel
+          (opened)="panelOpenState = true"
+          (closed)="panelOpenState = false"
+        >
+          <mat-expansion-panel-header id="pannel">
+            <mat-panel-title>Network </mat-panel-title>
+          </mat-expansion-panel-header>
+          <a mat-list-item>Summary</a>
+          <a mat-list-item>General Network Settings</a>
+          <a mat-list-item>Wireless</a>
+          <a mat-list-item>Advance Settings</a>
+          <a mat-list-item>Network Security</a>
+          <a mat-list-item>Web Proxy</a>
+          <a mat-list-item routerLink="hp/network/wifiDirect/status"
+            >Wifi Direct</a
+          >
+        </mat-expansion-panel>
+        <mat-nav-list class="item"><a mat-list-item>Security</a></mat-nav-list>
+      </mat-nav-list>
+    </div>
+  </div>
+</div>
